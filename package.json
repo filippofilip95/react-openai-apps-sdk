@@ -1,6 +1,6 @@
 {
   "name": "react-openai-apps-sdk",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "React hooks and devtools for OpenAI Apps SDK",
   "author": "Filip Popranec <filip.popranec@gmail.com>",
   "license": "MIT",

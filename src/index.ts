@@ -14,6 +14,10 @@ export { OpenAIDevToolsPanel } from './components/OpenAIDevToolsPanel';
 // Hooks
 export { useOpenAI } from './hooks/useOpenAI';
 export { useOpenAIGlobal } from './hooks/useOpenAIGlobal';
+export { useDisplayMode } from './hooks/useDisplayMode';
+export { useMaxHeight } from './hooks/useMaxHeight';
+export { useWidgetProps } from './hooks/useWidgetProps';
+export { useWidgetState } from './hooks/useWidgetState';
 
 // Core utilities (advanced usage)
 export {
