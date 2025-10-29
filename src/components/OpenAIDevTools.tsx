@@ -20,19 +20,22 @@ export function OpenAIDevTools({
   const [isOpen, setIsOpen] = useState(initialIsOpen);
   const [isMock, setIsMock] = useState(false);
 
-  // Initialize mock if needed
+  // Initialize mock if needed (only in development)
   useEffect(() => {
-    if (shouldCreateMock(enableMock)) {
+    if (process.env.NODE_ENV === 'development' && shouldCreateMock(enableMock)) {
       console.log('[OpenAI DevTools] Creating mock window.openai');
       window.openai = createMockOpenAI(mockConfig);
       setIsMock(true);
     } else if (window.openai?.__devMock) {
       setIsMock(true);
+    } else if (window.openai && !window.openai.__devMock) {
+      // Real OpenAI detected (production ChatGPT)
+      setIsMock(false);
     }
   }, [enableMock, mockConfig]);
 
-  // Production guard
-  if (process.env.NODE_ENV === 'production') {
+  // Production guard - can be overridden with build-time flag
+  if (process.env.NODE_ENV === 'production' && !import.meta.env.VITE_ENABLE_OPENAI_DEVTOOLS) {
     return null;
   }
 

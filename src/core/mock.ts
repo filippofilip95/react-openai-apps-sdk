@@ -2,7 +2,7 @@
  * Mock implementation of window.openai for local development
  */
 
-import type { OpenAI, OpenAiGlobals, DisplayMode, Theme } from '../types';
+import type { DisplayMode, OpenAI, OpenAiGlobals, Theme } from '../types';
 
 const STORAGE_KEY = 'react-openai-apps-sdk-state';
 
@@ -137,7 +137,7 @@ function extractStateFromMock(openai: OpenAI): Partial<OpenAiGlobals> {
 export function shouldCreateMock(enableMock: boolean = true): boolean {
   if (typeof window === 'undefined') return false;
   if (!enableMock) return false;
-
+1
   // Real ChatGPT detected
   if (window.openai && !(window.openai as any).__devMock) {
     console.log('[OpenAI DevTools] Real window.openai detected, using native');

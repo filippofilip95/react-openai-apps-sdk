@@ -113,9 +113,18 @@ await openai?.callTool('my_tool', { arg: 'value' });
 
 ### In Production Builds
 
-- Components render `null` (tree-shaken)
+- DevTools automatically removed (tree-shaken)
 - Hooks still work (access real `window.openai`)
 - Zero bundle size impact
+
+**Production Debugging**: Enable DevTools in production ChatGPT for debugging:
+
+```bash
+# Build with DevTools enabled (read-only inspector)
+VITE_ENABLE_OPENAI_DEVTOOLS=true pnpm build
+```
+
+This allows you to inspect `toolOutput`, `widgetState`, and other globals in production ChatGPT without creating mocks. The DevTools become a read-only inspector.
 
 ## Comparison
 
