@@ -1,6 +1,6 @@
 {
   "name": "react-openai-devtools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Development tools for OpenAI Apps SDK - Inspect state, test themes, log events (React Query DevTools for OpenAI widgets)",
   "author": "Filip Popranec <filip.popranec@gmail.com>",
   "license": "MIT",
