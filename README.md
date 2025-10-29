@@ -147,11 +147,11 @@ The UI is React-only, but core utilities (`createMockOpenAI`, `updateMockState`)
 
 ## License
 
-MIT © [Filip Popranec](https://github.com/filippofilip95)
+MIT © [Filip Papranec](https://github.com/filippofilip95)
 
 ---
 
-**Built by** [Filip Popranec](https://github.com/filippofilip95) **with** [Claude Code](https://claude.ai/code)
+**Built by** [Filip Papranec](https://github.com/filippofilip95) **with** [Claude Code](https://claude.ai/code)
 
 **Inspired by**:
 - [React Query DevTools](https://tanstack.com/query/latest/docs/framework/react/devtools)

@@ -8,7 +8,7 @@ The **react-openai-apps-sdk** package is fully configured and ready for npm publ
 - **Version**: `0.1.0`
 - **Repository**: https://github.com/filippofilip95/react-openai-apps-sdk
 - **License**: MIT
-- **Author**: Filip Popranec
+- **Author**: Filip Papranec
 
 ## ✅ Completed Setup
 

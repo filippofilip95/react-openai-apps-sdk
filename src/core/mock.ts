@@ -4,7 +4,7 @@
 
 import type { OpenAI, OpenAiGlobals, DisplayMode, Theme } from '../types';
 
-const STORAGE_KEY = 'openai-devtools-state';
+const STORAGE_KEY = 'react-openai-apps-sdk-state';
 
 export function getStoredState(): Partial<OpenAiGlobals> {
   if (typeof localStorage === 'undefined') return {};
