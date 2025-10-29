@@ -1,5 +1,7 @@
 # API Reference
 
+> React hooks and devtools for OpenAI Apps SDK
+
 Complete API documentation for react-openai-apps-sdk.
 
 ## Components

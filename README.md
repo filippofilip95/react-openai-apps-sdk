@@ -1,11 +1,11 @@
 # React OpenAI Apps SDK
 
-> React SDK for OpenAI Apps - Hooks, DevTools, and utilities for building ChatGPT widgets
+> React hooks and devtools for OpenAI Apps SDK
 
 [![npm version](https://img.shields.io/npm/v/react-openai-apps-sdk)](https://www.npmjs.com/package/react-openai-apps-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-**React OpenAI Apps SDK** provides React hooks and DevTools for building ChatGPT widgets. Includes a floating toolbar for debugging - toggle themes, change display modes, and adjust heights in real-time without reloading ChatGPT.
+**React OpenAI Apps SDK** provides React hooks and DevTools for building ChatGPT widgets with OpenAI Apps SDK. Access `window.openai` globals through hooks, mock state for local development, and debug with a floating toolbar - toggle themes, change display modes, and inspect state in real-time.
 
 🎨 **Toggle theme** (light/dark) • 📐 **Change display mode** (inline/fullscreen/pip) • 📏 **Adjust height** • 🧪 **Mock `window.openai`** for local development
 

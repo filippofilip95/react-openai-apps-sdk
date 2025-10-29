@@ -1,5 +1,7 @@
 # Examples
 
+> React hooks and devtools for OpenAI Apps SDK
+
 Complete examples for using react-openai-apps-sdk.
 
 ## Basic Usage

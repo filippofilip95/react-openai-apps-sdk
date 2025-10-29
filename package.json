@@ -1,7 +1,7 @@
 {
   "name": "react-openai-apps-sdk",
-  "version": "0.1.1",
-  "description": "React SDK for OpenAI Apps - Hooks, DevTools, and utilities for building ChatGPT widgets",
+  "version": "0.1.2",
+  "description": "React hooks and devtools for OpenAI Apps SDK",
   "author": "Filip Popranec <filip.popranec@gmail.com>",
   "license": "MIT",
   "repository": {
