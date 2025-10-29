@@ -105,6 +105,86 @@ function Widget() {
 }
 ```
 
+### Using Convenience Hooks
+
+```tsx
+import { useDisplayMode, useMaxHeight } from 'react-openai-apps-sdk';
+
+function ResponsiveWidget() {
+  const displayMode = useDisplayMode();
+  const maxHeight = useMaxHeight();
+
+  return (
+    <div style={{ height: maxHeight || 600 }}>
+      {displayMode === 'fullscreen' ? (
+        <FullscreenLayout />
+      ) : (
+        <InlineLayout />
+      )}
+    </div>
+  );
+}
+```
+
+### Using Widget Props (Type-Safe Tool Output)
+
+```tsx
+import { useWidgetProps } from 'react-openai-apps-sdk';
+
+interface PostData {
+  platform: string;
+  text: string;
+  imageUrls?: string[];
+}
+
+function PostWidget() {
+  const props = useWidgetProps<PostData>({
+    platform: 'instagram',
+    text: ''
+  });
+
+  return (
+    <div>
+      <h2>{props.platform}</h2>
+      <p>{props.text}</p>
+      {props.imageUrls?.map(url => <img key={url} src={url} />)}
+    </div>
+  );
+}
+```
+
+### Using Widget State (Persistent State)
+
+```tsx
+import { useWidgetState } from 'react-openai-apps-sdk';
+
+function FavoritesWidget() {
+  const [favorites, setFavorites] = useWidgetState<string[]>([]);
+
+  const addFavorite = (id: string) => {
+    setFavorites(prev => [...(prev || []), id]);
+  };
+
+  const removeFavorite = (id: string) => {
+    setFavorites(prev => prev?.filter(fav => fav !== id) || null);
+  };
+
+  return (
+    <div>
+      <h3>Favorites ({favorites?.length || 0})</h3>
+      <ul>
+        {favorites?.map(id => (
+          <li key={id}>
+            {id}
+            <button onClick={() => removeFavorite(id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
 ### Calling Tools
 
 ```tsx
@@ -327,3 +407,42 @@ function App() {
   }}
 />
 ```
+
+## Production Debugging
+
+### Debug in Real ChatGPT
+
+Enable DevTools in production builds to debug issues in real ChatGPT:
+
+```bash
+# Build with DevTools enabled
+VITE_ENABLE_OPENAI_DEVTOOLS=true pnpm build
+```
+
+Then in your widget:
+
+```tsx
+import { OpenAIDevTools, useWidgetProps } from 'react-openai-apps-sdk';
+
+function ProductionWidget() {
+  const props = useWidgetProps();
+
+  return (
+    <>
+      <YourWidget data={props} />
+
+      {/* DevTools will render in production when flag is set */}
+      <OpenAIDevTools />
+    </>
+  );
+}
+```
+
+**What you can inspect:**
+- Real `toolOutput` from ChatGPT
+- Current `widgetState`
+- Theme, display mode, max height
+- User agent, safe area, locale
+- All globals in real-time
+
+**Note:** No mocks are created. DevTools become a read-only inspector for the real ChatGPT environment.

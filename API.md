@@ -94,6 +94,66 @@ const widgetState = useOpenAIGlobal('widgetState');
 
 **Based on [OpenAI Apps SDK official examples](https://developers.openai.com/apps-sdk/build/custom-ux)**
 
+### `useDisplayMode()`
+
+Convenience hook for accessing display mode. Equivalent to `useOpenAIGlobal('displayMode')`.
+
+**Returns:** `'inline' | 'fullscreen' | 'pip' | null`
+
+**Example:**
+
+```tsx
+const displayMode = useDisplayMode();
+const isFullscreen = displayMode === 'fullscreen';
+```
+
+### `useMaxHeight()`
+
+Convenience hook for accessing max height. Equivalent to `useOpenAIGlobal('maxHeight')`.
+
+**Returns:** `number | null`
+
+**Example:**
+
+```tsx
+const maxHeight = useMaxHeight();
+return <div style={{ height: maxHeight || 600 }}>Content</div>;
+```
+
+### `useWidgetProps(defaultState?)`
+
+Get tool output data passed to the widget. Equivalent to `useOpenAIGlobal('toolOutput')` with fallback support.
+
+**Parameters:**
+- `defaultState` (optional): Default state if `toolOutput` is null
+
+**Returns:** `T` (typed based on default state)
+
+**Example:**
+
+```tsx
+const props = useWidgetProps({ platform: 'instagram', text: '' });
+// props.platform, props.text are now type-safe
+```
+
+### `useWidgetState(defaultState?)`
+
+Persistent widget state shared with the model. Returns state and setter function.
+
+**Parameters:**
+- `defaultState` (optional): Default state if `widgetState` is null
+
+**Returns:** `readonly [T | null, (state: SetStateAction<T | null>) => void]`
+
+**Example:**
+
+```tsx
+const [favorites, setFavorites] = useWidgetState<string[]>([]);
+
+// Update state (persisted and shared with model)
+setFavorites(prev => [...prev, newItem]);
+```
+
 ## Advanced Functions
 
 ### `createMockOpenAI(config?)`
@@ -202,6 +262,24 @@ When DevTools are active:
 
 In production (`NODE_ENV=production`):
 
-- Components render `null` (tree-shaken)
+- DevTools automatically removed (tree-shaken)
 - Hooks still work (access real `window.openai`)
 - Zero bundle size impact
+
+### Production Debugging
+
+Enable DevTools in production ChatGPT builds for debugging:
+
+```bash
+# Build with DevTools enabled (read-only inspector)
+VITE_ENABLE_OPENAI_DEVTOOLS=true pnpm build
+```
+
+**Behavior with flag enabled:**
+- DevTools render in production ChatGPT
+- Read-only inspector for real `window.openai` state
+- No mock creation (safe for real environment)
+- Inspect `toolOutput`, `widgetState`, and all globals
+- Useful for debugging production issues
+
+**Note:** This only works with ESM builds (Vite, webpack 5+). CJS builds always tree-shake DevTools.
