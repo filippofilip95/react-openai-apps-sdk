@@ -1,13 +1,13 @@
 # Examples
 
-Complete examples for using react-openai-devtools.
+Complete examples for using react-openai-apps-sdk.
 
 ## Basic Usage
 
 ### Simple Widget with DevTools
 
 ```tsx
-import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-devtools';
+import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-apps-sdk';
 
 function MyWidget() {
   const theme = useOpenAIGlobal('theme');
@@ -62,7 +62,7 @@ function MyWidget() {
 
 ```tsx
 import { useState } from 'react';
-import { OpenAIDevToolsPanel } from 'react-openai-devtools';
+import { OpenAIDevToolsPanel } from 'react-openai-apps-sdk';
 
 function DevPage() {
   const [showPanel, setShowPanel] = useState(true);
@@ -87,7 +87,7 @@ function DevPage() {
 ### Accessing All Globals
 
 ```tsx
-import { useOpenAIGlobal } from 'react-openai-devtools';
+import { useOpenAIGlobal } from 'react-openai-apps-sdk';
 
 function Widget() {
   const theme = useOpenAIGlobal('theme');
@@ -106,7 +106,7 @@ function Widget() {
 ### Calling Tools
 
 ```tsx
-import { useOpenAI } from 'react-openai-devtools';
+import { useOpenAI } from 'react-openai-apps-sdk';
 
 function Widget() {
   const openai = useOpenAI();
@@ -123,7 +123,7 @@ function Widget() {
 ### Sending Follow-up Messages
 
 ```tsx
-import { useOpenAI } from 'react-openai-devtools';
+import { useOpenAI } from 'react-openai-apps-sdk';
 
 function Calendar() {
   const openai = useOpenAI();
@@ -143,7 +143,7 @@ function Calendar() {
 ### Manual Mock Creation
 
 ```tsx
-import { createMockOpenAI, updateMockState } from 'react-openai-devtools';
+import { createMockOpenAI, updateMockState } from 'react-openai-apps-sdk';
 
 // In your test setup
 beforeEach(() => {
@@ -164,7 +164,7 @@ test('theme switching', () => {
 ### Custom Event Handling
 
 ```tsx
-import { dispatchOpenAIEvent } from 'react-openai-devtools';
+import { dispatchOpenAIEvent } from 'react-openai-apps-sdk';
 
 // Simulate a theme change
 dispatchOpenAIEvent('set_globals', {
@@ -178,7 +178,7 @@ dispatchOpenAIEvent('set_globals', {
 ### Post Preview Widget
 
 ```tsx
-import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-devtools';
+import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-apps-sdk';
 import PostPreview from '@kontentino/kontentino-post-previews';
 
 function PostPreviewWidget() {
@@ -201,7 +201,7 @@ function PostPreviewWidget() {
 ### Content Calendar
 
 ```tsx
-import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-devtools';
+import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-apps-sdk';
 
 function CalendarWidget() {
   const maxHeight = useOpenAIGlobal('maxHeight');
@@ -225,7 +225,7 @@ function CalendarWidget() {
 
 ```tsx
 import { render } from '@testing-library/react';
-import { createMockOpenAI } from 'react-openai-devtools';
+import { createMockOpenAI } from 'react-openai-apps-sdk';
 import MyWidget from './MyWidget';
 
 describe('MyWidget', () => {
@@ -246,7 +246,7 @@ describe('MyWidget', () => {
 ### Integration Test
 
 ```tsx
-import { updateMockState } from 'react-openai-devtools';
+import { updateMockState } from 'react-openai-apps-sdk';
 
 test('theme toggle updates UI', async () => {
   render(<MyWidget />);
@@ -272,7 +272,7 @@ test('theme toggle updates UI', async () => {
 import { lazy, Suspense } from 'react';
 
 const OpenAIDevTools = lazy(() =>
-  import('react-openai-devtools').then(m => ({ default: m.OpenAIDevTools }))
+  import('react-openai-apps-sdk').then(m => ({ default: m.OpenAIDevTools }))
 );
 
 function App() {

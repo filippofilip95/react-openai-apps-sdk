@@ -1,28 +1,28 @@
-# React OpenAI DevTools
+# React OpenAI Apps SDK
 
-> Development tools for OpenAI Apps SDK - Like React Query DevTools for ChatGPT widgets
+> React SDK for OpenAI Apps - Hooks, DevTools, and utilities for building ChatGPT widgets
 
-[![npm version](https://img.shields.io/npm/v/react-openai-devtools)](https://www.npmjs.com/package/react-openai-devtools)
+[![npm version](https://img.shields.io/npm/v/react-openai-apps-sdk)](https://www.npmjs.com/package/react-openai-apps-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-**React OpenAI DevTools** is a floating toolbar for debugging ChatGPT widgets. Toggle themes, change display modes, and adjust heights in real-time without reloading ChatGPT.
+**React OpenAI Apps SDK** provides React hooks and DevTools for building ChatGPT widgets. Includes a floating toolbar for debugging - toggle themes, change display modes, and adjust heights in real-time without reloading ChatGPT.
 
 🎨 **Toggle theme** (light/dark) • 📐 **Change display mode** (inline/fullscreen/pip) • 📏 **Adjust height** • 🧪 **Mock `window.openai`** for local development
 
-Based on [OpenAI Apps SDK official examples](https://developers.openai.com/apps-sdk/build/custom-ux).
+Based on [OpenAI Apps SDK custom UX guide](https://developers.openai.com/apps-sdk/build/custom-ux) and [official examples](https://github.com/openai/openai-apps-sdk-examples).
 
 ## Quick Start
 
 **Install:**
 
 ```bash
-npm install react-openai-devtools
+npm install react-openai-apps-sdk
 ```
 
 **Use:**
 
 ```tsx
-import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-devtools';
+import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-apps-sdk';
 
 function MyWidget() {
   const theme = useOpenAIGlobal('theme');
@@ -140,8 +140,8 @@ The UI is React-only, but core utilities (`createMockOpenAI`, `updateMockState`)
 
 ## Links
 
-- [npm Package](https://www.npmjs.com/package/react-openai-devtools)
-- [GitHub Repository](https://github.com/filippofilip95/react-openai-devtools)
+- [npm Package](https://www.npmjs.com/package/react-openai-apps-sdk)
+- [GitHub Repository](https://github.com/filippofilip95/react-openai-apps-sdk)
 - [OpenAI Apps SDK Docs](https://developers.openai.com/apps-sdk)
 - [Model Context Protocol](https://modelcontextprotocol.io)
 

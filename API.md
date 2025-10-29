@@ -1,6 +1,6 @@
 # API Reference
 
-Complete API documentation for react-openai-devtools.
+Complete API documentation for react-openai-apps-sdk.
 
 ## Components
 

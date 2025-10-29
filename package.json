@@ -1,25 +1,26 @@
 {
-  "name": "react-openai-devtools",
+  "name": "react-openai-apps-sdk",
   "version": "0.1.1",
-  "description": "Development tools for OpenAI Apps SDK - Inspect state, test themes, log events (React Query DevTools for OpenAI widgets)",
+  "description": "React SDK for OpenAI Apps - Hooks, DevTools, and utilities for building ChatGPT widgets",
   "author": "Filip Popranec <filip.popranec@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/filippofilip95/react-openai-devtools"
+    "url": "https://github.com/filippofilip95/react-openai-apps-sdk"
   },
-  "homepage": "https://github.com/filippofilip95/react-openai-devtools#readme",
+  "homepage": "https://github.com/filippofilip95/react-openai-apps-sdk#readme",
   "bugs": {
-    "url": "https://github.com/filippofilip95/react-openai-devtools/issues"
+    "url": "https://github.com/filippofilip95/react-openai-apps-sdk/issues"
   },
   "keywords": [
     "openai",
     "apps-sdk",
-    "devtools",
-    "development",
     "react",
     "chatgpt",
     "widgets",
+    "hooks",
+    "devtools",
+    "development",
     "debugging",
     "inspector",
     "mcp"
