@@ -28,6 +28,202 @@ function MyWidget() {
 }
 ```
 
+## SafeArea Component
+
+### Basic Safe Area Usage
+
+Automatically respect mobile notches, rounded corners, system UI, and ChatGPT's chat input bar:
+
+```tsx
+import { SafeArea, useOpenAIGlobal } from 'react-openai-apps-sdk';
+
+function MyWidget() {
+  const theme = useOpenAIGlobal('theme');
+
+  return (
+    <SafeArea>
+      <div className={theme === 'dark' ? 'dark-theme' : 'light-theme'}>
+        <h1>My Widget</h1>
+        <p>Content is automatically inset from notches and system UI</p>
+      </div>
+    </SafeArea>
+  );
+}
+```
+
+### SafeArea with Custom Height
+
+Specify a custom height for inline mode (when widget is embedded in chat):
+
+```tsx
+<SafeArea fallbackHeight={800}>
+  <TallerWidget />
+</SafeArea>
+```
+
+### Full-Width Widget (Ignore Left/Right Insets)
+
+For widgets that need to extend to screen edges (like full-bleed images):
+
+```tsx
+<SafeArea applyInsets={{ top: true, bottom: true, left: false, right: false }}>
+  <FullWidthImageGallery />
+</SafeArea>
+```
+
+### SafeArea with Tailwind Styling
+
+Combine SafeArea with Tailwind classes for responsive layouts:
+
+```tsx
+<SafeArea className="bg-gradient-to-b from-blue-500 to-purple-600 flex flex-col" fallbackHeight={700}>
+  <Header />
+  <main className="flex-1 overflow-auto">
+    <Content />
+  </main>
+  <Footer />
+</SafeArea>
+```
+
+### Complex Layout with SafeArea
+
+Build complex layouts that respect safe areas:
+
+```tsx
+import { SafeArea, useOpenAIGlobal } from 'react-openai-apps-sdk';
+
+function Calendar() {
+  const displayMode = useOpenAIGlobal('displayMode');
+  const theme = useOpenAIGlobal('theme');
+
+  return (
+    <SafeArea
+      className={`relative ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}
+      fallbackHeight={displayMode === 'fullscreen' ? 900 : 600}
+    >
+      <div className="absolute inset-0 flex flex-col">
+        <header className="p-4 border-b">
+          <h1>Content Calendar</h1>
+        </header>
+
+        <main className="flex-1 overflow-auto p-4">
+          <CalendarGrid />
+        </main>
+
+        <footer className="p-4 border-t">
+          <button>Add Post</button>
+        </footer>
+      </div>
+    </SafeArea>
+  );
+}
+```
+
+### Responsive SafeArea with Display Mode
+
+Adjust layout based on display mode while respecting safe areas:
+
+```tsx
+import { SafeArea, useDisplayMode } from 'react-openai-apps-sdk';
+
+function ResponsiveWidget() {
+  const displayMode = useDisplayMode();
+  const isFullscreen = displayMode === 'fullscreen';
+
+  return (
+    <SafeArea
+      fallbackHeight={isFullscreen ? 1000 : 600}
+      className={isFullscreen ? 'p-8' : 'p-4'}
+    >
+      {isFullscreen ? (
+        <DetailedView />
+      ) : (
+        <CompactView />
+      )}
+    </SafeArea>
+  );
+}
+```
+
+### Mobile-First Widget with SafeArea
+
+Build mobile-first widgets that automatically adapt to device constraints:
+
+```tsx
+import { SafeArea, useOpenAIGlobal } from 'react-openai-apps-sdk';
+
+function MobileWidget() {
+  const userAgent = useOpenAIGlobal('userAgent');
+  const isMobile = userAgent?.device?.type === 'mobile';
+
+  return (
+    <SafeArea
+      fallbackHeight={isMobile ? 700 : 600}
+      className="flex flex-col"
+    >
+      <nav className="sticky top-0 bg-white shadow-sm p-4">
+        <MobileNav />
+      </nav>
+
+      <main className="flex-1 overflow-auto">
+        <Content />
+      </main>
+
+      {isMobile && (
+        <div className="sticky bottom-0 bg-white border-t p-4">
+          <MobileActions />
+        </div>
+      )}
+    </SafeArea>
+  );
+}
+```
+
+### SafeArea with Custom Styles
+
+Merge custom inline styles with safe area adjustments:
+
+```tsx
+<SafeArea
+  style={{
+    background: 'linear-gradient(to bottom, #667eea 0%, #764ba2 100%)',
+    color: 'white',
+  }}
+  fallbackHeight={650}
+>
+  <div className="flex items-center justify-center h-full">
+    <YourCenteredContent />
+  </div>
+</SafeArea>
+```
+
+### Debug SafeArea Insets
+
+Visualize safe area insets during development:
+
+```tsx
+import { SafeArea, useOpenAIGlobal, OpenAIDevTools } from 'react-openai-apps-sdk';
+
+function DebugWidget() {
+  const safeArea = useOpenAIGlobal('safeArea');
+  const insets = safeArea?.insets;
+
+  return (
+    <>
+      <SafeArea className="bg-blue-50">
+        <div className="p-4 bg-white rounded">
+          <h2>Safe Area Debug</h2>
+          <pre>{JSON.stringify(insets, null, 2)}</pre>
+          <YourWidget />
+        </div>
+      </SafeArea>
+
+      <OpenAIDevTools />
+    </>
+  );
+}
+```
+
 ## Custom Configuration
 
 ### Dark Mode by Default

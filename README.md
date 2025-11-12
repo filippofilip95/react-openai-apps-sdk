@@ -22,16 +22,18 @@ npm install react-openai-apps-sdk
 **Use:**
 
 ```tsx
-import { OpenAIDevTools, useOpenAIGlobal } from 'react-openai-apps-sdk';
+import { OpenAIDevTools, SafeArea, useOpenAIGlobal } from 'react-openai-apps-sdk';
 
 function MyWidget() {
   const theme = useOpenAIGlobal('theme');
 
   return (
     <>
-      <div className={theme === 'dark' ? 'dark' : 'light'}>
-        Your widget content
-      </div>
+      <SafeArea>
+        <div className={theme === 'dark' ? 'dark' : 'light'}>
+          Your widget content
+        </div>
+      </SafeArea>
 
       <OpenAIDevTools />
     </>
@@ -48,6 +50,7 @@ That's it! In development, you'll see a floating button. In production, it's aut
 - ⌨️ **Keyboard shortcuts** - `E` for expand, `T` for theme
 - 📦 **Tree-shakeable** - Auto-removed in production builds
 - 🔌 **Framework-aware** - Based on OpenAI's official examples
+- 📱 **SafeArea component** - Automatically respect mobile notches and system UI
 
 ## Keyboard Shortcuts
 
@@ -61,6 +64,16 @@ That's it! In development, you'll see a floating button. In production, it's aut
 - **[Contributing](./CONTRIBUTING.md)** - Development setup and guidelines
 
 ## Common Use Cases
+
+### Respect Safe Areas (Mobile Notches, System UI)
+
+```tsx
+import { SafeArea } from 'react-openai-apps-sdk';
+
+<SafeArea fallbackHeight={600}>
+  <YourWidget />
+</SafeArea>
+```
 
 ### Get Tool Output
 

@@ -56,6 +56,66 @@ Embedded mode - renders toolbar inline.
 />
 ```
 
+### `<SafeArea />`
+
+Container that automatically respects safe area insets from mobile devices, system UI (notches, rounded corners), and ChatGPT's chat input bar.
+
+**WHY IT EXISTS:**
+Mobile devices have notches, rounded corners, and system UI that obscure content. ChatGPT's chat input bar takes vertical space. This component automatically adjusts your widget's dimensions to fit within the safe, visible area.
+
+**DESIGN DECISIONS:**
+- Top inset uses padding (pushes content down from notch, maintains background)
+- Bottom inset reduces height (prevents content from being hidden by chat input)
+- Left/right insets use padding (safe area from rounded corners)
+- Fullscreen: percentage-based height (responsive)
+- Inline: fixed pixel height (embedded in chat)
+
+**Props:**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Child components to render within safe area |
+| `className` | `string` | `''` | Additional CSS classes (Tailwind, CSS modules, etc.) |
+| `style` | `CSSProperties` | `{}` | Inline styles (merged with safe area styles) |
+| `fallbackHeight` | `number` | `600` | Height in pixels for inline mode |
+| `applyInsets` | `object` | All sides | Which insets to apply: `{ top?, bottom?, left?, right? }` |
+
+**Examples:**
+
+```tsx
+// Basic usage - handles all safe area concerns automatically
+<SafeArea>
+  <YourWidget />
+</SafeArea>
+
+// Custom fallback height for inline mode
+<SafeArea fallbackHeight={800}>
+  <TallerWidget />
+</SafeArea>
+
+// Apply only top and bottom insets (full-width widget)
+<SafeArea applyInsets={{ top: true, bottom: true, left: false, right: false }}>
+  <FullWidthWidget />
+</SafeArea>
+
+// Combine with className for styling
+<SafeArea className="bg-gray-50 flex flex-col" fallbackHeight={600}>
+  <Header />
+  <Content />
+  <Footer />
+</SafeArea>
+```
+
+**WHEN TO USE:**
+- Root container for your widget
+- When content should avoid being obscured by device notches or system UI
+- When you need consistent padding on mobile devices
+
+**WHEN NOT TO USE:**
+- For nested containers (only use at root level)
+- If you're manually managing device-specific layouts
+- For desktop-only widgets that don't need mobile consideration
+
 ## Hooks
 
 ### `useOpenAI()`

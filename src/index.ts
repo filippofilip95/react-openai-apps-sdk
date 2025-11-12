@@ -10,6 +10,8 @@
 // Main components
 export { OpenAIDevTools } from './components/OpenAIDevTools';
 export { OpenAIDevToolsPanel } from './components/OpenAIDevToolsPanel';
+export { SafeArea } from './components/SafeArea';
+export type { SafeAreaProps } from './components/SafeArea';
 
 // Hooks
 export { useOpenAI } from './hooks/useOpenAI';
@@ -37,7 +39,7 @@ export type {
   DisplayMode,
   DeviceType,
   SafeAreaInsets,
-  SafeArea,
+  SafeArea as SafeAreaType,
   UserAgent,
   CallTool,
   RequestDisplayMode,
