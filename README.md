@@ -88,11 +88,23 @@ const displayMode = useOpenAIGlobal('displayMode');
 const isFullscreen = displayMode === 'fullscreen';
 ```
 
-### Call Tools
+### Call Tools (with error handling)
 
 ```tsx
-const openai = useOpenAI();
-await openai?.callTool('my_tool', { arg: 'value' });
+const { callTool, sendFollowUpMessage } = useOpenAIActions();
+
+// Call a tool with built-in error handling
+const { success, data } = await callTool({
+  name: 'my_tool',
+  args: { arg: 'value' },
+  onError: (error) => console.error('Tool call failed:', error),
+});
+
+// Send follow-up message
+await sendFollowUpMessage({
+  prompt: 'Here is the result...',
+  onSuccess: () => console.log('Message sent!'),
+});
 ```
 
 ### Custom Mock for Testing

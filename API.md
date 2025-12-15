@@ -133,6 +133,106 @@ await openai?.callTool('my_tool', { arg: 'value' });
 await openai?.sendFollowUpMessage({ prompt: 'Follow up...' });
 ```
 
+### `useOpenAIActions()`
+
+Safe wrappers for OpenAI API actions with built-in error handling and null checks. Eliminates the need for manual `window.openai` availability checks and try-catch blocks.
+
+**Returns:**
+
+```typescript
+{
+  sendFollowUpMessage: (options: SendFollowUpMessageOptions) => Promise<boolean>;
+  callTool: <T>(options: CallToolOptions<T>) => Promise<{ success: boolean; data?: T }>;
+  requestDisplayMode: (options: RequestDisplayModeOptions) => Promise<boolean>;
+  openExternal: (options: OpenExternalOptions) => boolean;
+  isAvailable: boolean;
+}
+```
+
+**Example:**
+
+```tsx
+const { sendFollowUpMessage, callTool, requestDisplayMode, openExternal, isAvailable } = useOpenAIActions();
+
+// Send a follow-up message with error handling
+const handleShare = async () => {
+  const success = await sendFollowUpMessage({
+    prompt: 'Here is my exported file: [Download](https://example.com/file.png)',
+    fallbackMessage: 'ChatGPT API not available. Try copying the URL instead.',
+    onSuccess: () => console.log('Shared successfully!'),
+    onError: (error) => console.error('Failed to share:', error),
+  });
+};
+
+// Call a tool with typed result
+const handlePreview = async (postId: string) => {
+  const { success, data } = await callTool<PostData>({
+    name: 'social_media.preview_post',
+    args: { postId },
+    onSuccess: (result) => console.log('Preview loaded:', result.structuredContent),
+    onError: (error) => alert(`Failed to load preview: ${error.message}`),
+  });
+
+  if (success && data) {
+    setPreviewData(data);
+  }
+};
+
+// Request display mode change
+const toggleFullscreen = async () => {
+  await requestDisplayMode({
+    mode: isFullscreen ? 'inline' : 'fullscreen',
+    onSuccess: (newMode) => setIsFullscreen(newMode === 'fullscreen'),
+  });
+};
+
+// Open external link
+const openDocs = () => {
+  openExternal({
+    href: 'https://docs.example.com',
+    onError: (error) => alert(`Failed to open link: ${error.message}`),
+  });
+};
+```
+
+**Benefits:**
+- ✅ No more null checks - Handles `window.openai` availability automatically
+- ✅ Built-in error handling - Consistent error handling across the app
+- ✅ Type-safe - Full TypeScript support with generics
+- ✅ Cleaner code - Reduces boilerplate by 50-70%
+
+**Options Types:**
+
+```typescript
+interface SendFollowUpMessageOptions {
+  prompt: string;
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+  fallbackMessage?: string;
+}
+
+interface CallToolOptions<T = unknown> {
+  name: string;
+  args: Record<string, unknown>;
+  onSuccess?: (result: { structuredContent?: T; result?: string }) => void;
+  onError?: (error: Error) => void;
+  fallbackMessage?: string;
+}
+
+interface RequestDisplayModeOptions {
+  mode: 'inline' | 'fullscreen' | 'pip';
+  onSuccess?: (mode: 'inline' | 'fullscreen' | 'pip') => void;
+  onError?: (error: Error) => void;
+  fallbackMessage?: string;
+}
+
+interface OpenExternalOptions {
+  href: string;
+  onError?: (error: Error) => void;
+  fallbackMessage?: string;
+}
+```
+
 ### `useOpenAIGlobal(key)`
 
 Returns a specific global from `window.openai`.

@@ -16,10 +16,17 @@ export type { SafeAreaProps } from './components/SafeArea';
 // Hooks
 export { useOpenAI } from './hooks/useOpenAI';
 export { useOpenAIGlobal } from './hooks/useOpenAIGlobal';
+export { useOpenAIActions } from './hooks/useOpenAIActions';
 export { useDisplayMode } from './hooks/useDisplayMode';
 export { useMaxHeight } from './hooks/useMaxHeight';
 export { useWidgetProps } from './hooks/useWidgetProps';
 export { useWidgetState } from './hooks/useWidgetState';
+export type {
+  SendFollowUpMessageOptions,
+  CallToolOptions,
+  RequestDisplayModeOptions,
+  OpenExternalOptions,
+} from './hooks/useOpenAIActions';
 
 // Core utilities (advanced usage)
 export {

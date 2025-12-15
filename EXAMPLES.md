@@ -383,6 +383,41 @@ function FavoritesWidget() {
 
 ### Calling Tools
 
+Use `useOpenAIActions` for built-in error handling and null checks:
+
+```tsx
+import { useOpenAIActions } from 'react-openai-apps-sdk';
+
+function Widget() {
+  const { callTool } = useOpenAIActions();
+  const [data, setData] = useState(null);
+
+  const handleRefresh = async () => {
+    const { success, data } = await callTool({
+      name: 'my_tool',
+      args: { arg: 'value' },
+      onSuccess: (result) => {
+        console.log('Tool called successfully:', result.structuredContent);
+        setData(result.structuredContent);
+      },
+      onError: (error) => {
+        console.error('Failed to call tool:', error);
+        alert(error.message);
+      },
+    });
+  };
+
+  return (
+    <div>
+      <button onClick={handleRefresh}>Refresh Data</button>
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
+}
+```
+
+**Alternative (manual approach):**
+
 ```tsx
 import { useOpenAI } from 'react-openai-apps-sdk';
 
@@ -399,6 +434,34 @@ function Widget() {
 ```
 
 ### Sending Follow-up Messages
+
+Use `useOpenAIActions` for built-in error handling:
+
+```tsx
+import { useOpenAIActions } from 'react-openai-apps-sdk';
+
+function Calendar() {
+  const { sendFollowUpMessage } = useOpenAIActions();
+
+  const handleShowPreview = async (post) => {
+    const success = await sendFollowUpMessage({
+      prompt: `Show me a preview of this post: ${post.text}`,
+      fallbackMessage: 'ChatGPT API not available. Please try again later.',
+      onSuccess: () => {
+        console.log('Preview request sent!');
+      },
+      onError: (error) => {
+        console.error('Failed to send message:', error);
+        alert(error.message);
+      },
+    });
+  };
+
+  return <button onClick={() => handleShowPreview(post)}>Preview</button>;
+}
+```
+
+**Alternative (manual approach):**
 
 ```tsx
 import { useOpenAI } from 'react-openai-apps-sdk';
