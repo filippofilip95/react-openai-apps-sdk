@@ -190,3 +190,8 @@ MIT © [Filip Papranec](https://github.com/filippofilip95)
 **Inspired by**:
 - [React Query DevTools](https://tanstack.com/query/latest/docs/framework/react/devtools)
 - [OpenAI Apps SDK Examples](https://developers.openai.com/apps-sdk/build/custom-ux)
+
+
+## Author
+
+Made by [Filip Papranec](https://github.com/filippofilip95), founder of [Digitaliko](https://www.digitaliko.com/?utm_source=github&utm_medium=readme&utm_campaign=react-openai-apps-sdk), a Slovak studio building custom software and AI agents.
